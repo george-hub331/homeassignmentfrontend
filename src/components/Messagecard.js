@@ -44,10 +44,10 @@ function Messagecard() {
       setisRead(data.isRead)
   }, [data])
 
-    const item = {subject, content, isRead }
+    const item = { subject, content, isRead }
 
     async function update () {
-      const result = await fetch(`https://homeassignmentapi.herokuapp.com/api/message/${data.id}`, {
+      const result = await fetch(`https://homeassignmentapi.herokuapp.com/api/message/${data[modalinfo]}`, {
         method: 'put',
         body:JSON.stringify(item),
         headers: {
@@ -68,11 +68,14 @@ function Messagecard() {
         <h4> Messages </h4>
         <br/>
 
-        {data.map((item, id ) =>
+        {data.map((item, id) =>
          <div className='message' key={item.item}>
             <div className='content'>
             <h4 className='message-header'> {item.subject}</h4>
-            <h6 className='message-expand' onClick={() =>  {setFormModal(!formModal) ; setModalinfo(id)}}>{item.content} </h6>
+            <h6 className='message-expand' onClick={() =>  {
+              setFormModal(!formModal) 
+              setModalinfo(id)
+              }}>{item.content} </h6>
             </div>
             <h6 className='message-status'> {item.isRead === true ? 'READ' : 'UNREAD' }</h6>
             </div>
