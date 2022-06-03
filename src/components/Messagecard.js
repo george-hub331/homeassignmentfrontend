@@ -36,7 +36,7 @@ function Messagecard() {
         })
       .then(res => res.json())
       .then(setData)
-    }, [])
+    }, [token])
 
     useEffect(() => {
       setSubject(data.subject)
@@ -58,6 +58,7 @@ function Messagecard() {
      .then(res => res.json())
        .then(data => {
          toast.info(data.message)
+         setFormModal(false)
        })
     return result
     }
@@ -89,7 +90,10 @@ function Messagecard() {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color='primary' onClick={update} >
+            <Button color='primary' onClick={() =>{
+              data[modalinfo].isRead = true;
+              update()
+              }} >
               Done
             </Button>{' '}
           </ModalFooter>
